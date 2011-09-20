@@ -7,10 +7,14 @@ describe "Etc.group" do
 
   it "raises a RuntimeError for parallel iteration" do
     proc {
-      Etc.group do | group |
-        Etc.group do | group2 |
+      catch(:loop_break) {
+        Etc.group do | group |
+          Etc.group do | group2 |
+            throw :loop_break
+          end
         end
-      end
+      }
     }.should raise_error(RuntimeError)
+    
   end
 end
