@@ -7,4 +7,9 @@ describe "Tsort#strongly_connected_components" do
     h.tsort
     h.strongly_connected_components.should == [[3], [2], [1]]
   end
+
+  it "returns an array of arrays of nodes where cyclical dependencies are arrays with more than one element" do
+    h = TSortHash[{1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}]
+    h.strongly_connected_components.map {|nodes| nodes.sort}.should == [[4], [2, 3], [1]]
+  end
 end
