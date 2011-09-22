@@ -14,7 +14,6 @@ describe "Etc.group" do
           end
         end
       }
-    }.should raise_error(RuntimeError)
-    
+    }.should raise_error(RuntimeError) 
   end
 end
